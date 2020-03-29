@@ -49,3 +49,4 @@ return <BidContext.Provider value={{bids, isLoading, GetBids, GetHighestBid, Add
 </BidContext.Provider>
 
 }
+export default BidContextProvider;
