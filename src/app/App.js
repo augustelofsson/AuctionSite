@@ -4,10 +4,12 @@ import AuctionContextProvider from '../contexts/auctionContext';
 import AuctionForm  from '../Components/AuctionForm';
 import AuctionList from '../Components/AuctionList';
 import BidContextProvider from '../contexts/BidContext';
+import AuctionContextProvider from '../contexts/loginContext';
 
 const App = () => {
   return (
-     <AuctionContextProvider>
+    <LoginContextProvider>
+    <AuctionContextProvider>
     <BidContextProvider>
     <div className="App">
    
@@ -19,7 +21,7 @@ const App = () => {
 
     </BidContextProvider>
      </AuctionContextProvider>
-     
+     </LoginContextProvider>
   );
 }
 
