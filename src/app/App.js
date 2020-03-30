@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
+import LoginContextProvider from '../contexts/loginContext';
 import AuctionContextProvider from '../contexts/auctionContext';
 import AuctionForm  from '../Components/AuctionForm';
 import AuctionList from '../Components/AuctionList';
 import AddBid from '../Components/AddBid';
 import BidContextProvider from '../contexts/BidContext';
-import LoginContextProvider from '../contexts/loginContext';
 
 const App = () => {
   return (

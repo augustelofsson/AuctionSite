@@ -1,8 +1,8 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const LoginContext = React.createContext();
+export const LoginContext = React.createContext();
 
-export const AuctionContextProvider = (props) => {
+const LoginContextProvider = (props) => {
     const [username, setUsername] = useState('');
 
     const handleLogin = (username) => {
@@ -22,4 +22,4 @@ export const AuctionContextProvider = (props) => {
     </LoginContext.Provider>
 }
 
-export default LoginContext;
+export default LoginContextProvider;
