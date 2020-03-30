@@ -3,22 +3,24 @@ import './App.css';
 import AuctionContextProvider from '../contexts/auctionContext';
 import AuctionForm  from '../Components/AuctionForm';
 import AuctionList from '../Components/AuctionList';
-import BidContextProvider from '../contexts/BidContext';
+import {BidContextProvider} from '../contexts/BidContext';
+import AddBid from '../Components/AddBid';
 
 const App = () => {
   return (
-     <AuctionContextProvider>
+    <AuctionContextProvider>
     <BidContextProvider>
     <div className="App">
    
       <h1>Grupparbete frontend2</h1>
       < AuctionForm/>
       < AuctionList/>
+      < AddBid/>
     </div>
     
 
     </BidContextProvider>
-     </AuctionContextProvider>
+    </AuctionContextProvider>
      
   );
 }
