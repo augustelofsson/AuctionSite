@@ -1,11 +1,11 @@
-import React,{createContext, useState} from 'react'
+import React,{createContext, useState, useEffect} from 'react'
 
 
 
 const API_URL = 'http://nackowskis.azurewebsites.net/api/';
 const GROUP_NUM = 2230;
 
-const BidContext = createContext();
+export const BidContext = createContext();
 
 
 
@@ -15,10 +15,9 @@ export const BidContextProvider = (props) =>  {
     const [bids, setBids] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-
-
+    
     const GetBids = async (id) => {
-        fetch(`${API_URL}bud/${GROUP_NUM}/${id}`)
+        await fetch(`${API_URL}bud/${GROUP_NUM}/${id}`)
         .then(res => res.json())
         .then(data => {
             setIsLoading(false);
@@ -27,26 +26,26 @@ export const BidContextProvider = (props) =>  {
     }
 
     const AddBid = async (bidData) => {
-        fetch(`${API_URL}bud/${GROUP_NUM}/${bidData.AuktionID }`, {
+        console.log(bidData)
+        await fetch(`${API_URL}bud/${GROUP_NUM}/${bidData.AuktionID}`, {
             method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body : JSON.stringify(bidData)
         })  
-        setBids(bidData.AuktionID);       
+        GetBids(bidData.AuktionID);       
     }
-    const HasBids = async (auctionID) => {
+    
 
-    }
+    const GetHighestBid = () => {
 
-    const GetHighestBid = async (AuktionID) => {
-        const bids = await GetBids(AuktionID);
-        const highestBid = bids[bids.lenght - 1]
+        const highestBid = bids[bids.length - 1]
         return highestBid.Summa;
     }
-
+   
     
 return <BidContext.Provider value={{bids, isLoading, GetBids, GetHighestBid, AddBid}}>
-    {props.children}
-</BidContext.Provider>
+            {props.children}
+        </BidContext.Provider>
 
 }
 export default BidContextProvider;
