@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { BidContext } from '../contexts/BidContext';
 import Bid from './Bid';
 
-const BidListComponent = ({ auktionID }) => {
+const BidList = ({ auktionID }) => {
   const { GetBids, bids } = useContext(BidContext);
 
   useEffect(() => {
@@ -18,4 +18,4 @@ const BidListComponent = ({ auktionID }) => {
   );
 };
 
-export default BidListComponent;
+export default BidList;
