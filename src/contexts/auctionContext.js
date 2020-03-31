@@ -86,7 +86,7 @@ export const AuctionProvider = (props) => {
     }, [auctions])
 
    
-    return <AuctionContext.Provider value={{ auctions, isLoading, handleAdd, handleDelete, handleUpdate, handleSubmit, handleSearchChange, handleReturnHome}}>
+    return <AuctionContext.Provider value={{ auctions, isLoading, handleAdd,handleDelete, handleUpdate, handleSubmit, handleSearchChange, handleReturnHome}}>
         {props.children}
         </AuctionContext.Provider>
 }
