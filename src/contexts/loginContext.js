@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 
-export const LoginContext = React.createContext();
+export const LoginContext = createContext();
 
 const LoginContextProvider = (props) => {
     const [username, setUsername] = useState('');
@@ -12,10 +12,6 @@ const LoginContextProvider = (props) => {
     const handleLogout = () => {
         setUsername('');
     }
-
-    useEffect(() => {
-
-    }, [username])
 
     return <LoginContext.Provider value={{ username, handleLogin, handleLogout }}>
         {props.children}

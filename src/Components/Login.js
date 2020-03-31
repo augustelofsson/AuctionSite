@@ -1,26 +1,27 @@
-import React from 'react';
-import LoginContext from '../contexts/loginContext';
+import React, { useState, useContext } from 'react';
+import { LoginContext } from '../contexts/loginContext';
 
 const Login = () => {
-    const [username, setUsername] = useState('');
+    const [inputUsername, setInputUsername] = useState('');
 
     const context = useContext(LoginContext);
 
     return (
-        <>
-            {context.username !== '' && (
+        <div className='ml-auto'>
+            {context.username === '' && (
                 <>
-                    <input type='text' placeholder='användare' value={context.username} onChange={(e) => setUsername(e.currentTarget.value)} />
-                    <button onClick={() => context.handleLogin(username)}>logga in</button>
+                    <input type='text' placeholder='användare' onChange={(e) => setInputUsername(e.currentTarget.value)} />
+                    <button onClick={() => context.handleLogin(inputUsername)}>logga in</button>
                 </>
             )}
 
-            {context.username === '' && (
+            {context.username !== '' && (
                 <>
-                    <button onClick={() => context.handleLogout}>logga ut</button>
+                    <span>{context.username}</span>
+                    <button onClick={() => context.handleLogout()}>logga ut</button>
                 </>
             )}
-        </>
+        </div>
     )
 }
 
