@@ -47,7 +47,7 @@ const showAuction = e => {
   
 
    return(<React.Fragment>
-             <button onClick={showAuction} >Add</button>
+             <button onClick={showAuction} >Add Auction</button>
        
         {showhide && <form  >
             <input type = "text" name ="titel" value={title} onChange={UpdateTitle}/>
