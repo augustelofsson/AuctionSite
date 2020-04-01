@@ -12,6 +12,7 @@ export const AuctionProvider = (props) => {
    
    
     const handleGetList = async () => {
+        setIsLoading(true);
         await fetch(API_URL + 'auktion/' + GROUP_NUM, {
             method: 'GET'
         })
@@ -20,18 +21,28 @@ export const AuctionProvider = (props) => {
         })
         .then(data => {
             setIsLoading(false);
-            if (search !=='') // filter if there is something
-            {
-                const list = data.filter(auc =>
-                    auc.Titel.toLowerCase().includes(search)
-                  );
-                  setAuctions(list);
-                  return;
-            }
-          
             setAuctions(data);
+            // if (search !== '') // filter if there is something
+            // {
+            //     const list = data.filter(auc =>
+            //         auc.Titel.toLowerCase().includes(search)
+            //     );
+            //     setAuctions(list);
+            // } else {
+            //     setAuctions(data);
+            // }
         })
     }
+    useEffect(() => {
+        if(search === ''){
+            handleGetList();
+        }else{
+            const list = auctions.filter(auc =>
+                auc.Titel.toLowerCase().includes(search)
+            );
+                setAuctions(list);
+        }
+    }, [search]) 
     
     const handleAdd = async (auction) => {
         auction.Gruppkod = GROUP_NUM;
@@ -77,11 +88,13 @@ export const AuctionProvider = (props) => {
             handleGetList();
             
            }
+
+         
    
     useEffect(() => {
          console.log(auctions);
          if (isLoading) {
-         handleGetList();
+            handleGetList();
          }
     }, [auctions])
 
