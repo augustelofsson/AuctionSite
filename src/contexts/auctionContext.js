@@ -20,7 +20,7 @@ export const AuctionProvider = (props) => {
         })
         .then(data => {
             setIsLoading(false);
-            if (search !='') // filter if there is something
+            if (search !=='') // filter if there is something
             {
                 const list = data.filter(auc =>
                     auc.Titel.toLowerCase().includes(search)

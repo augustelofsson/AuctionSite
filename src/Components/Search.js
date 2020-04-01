@@ -13,13 +13,12 @@ const Search= ()=>{
            Home
         </button>
       
-        </div>            
-         
-			  
+        </div>           
+        		  
         <form onSubmit={(e) => handleSubmit(e)}>
         <label>Search:</label>
         <input onChange={(e) => handleSearchChange(e)} type="text" c placeholder="Search.." />
-        <button type="submit" >Search</button>
+        
         </form>
 
   </React.Fragment>
