@@ -13,7 +13,7 @@ const App = () => {
       <AuctionContextProvider>
         <BidContextProvider>
             <NavBar />
-            <AuctionList/>
+            <AuctionList/>            
             <AddBid/>
         </BidContextProvider>
       </AuctionContextProvider>

@@ -43,23 +43,22 @@ const showAuction = e => {
     e.preventDefault();
     setShowHide(!showhide);
 }
-
-  
-
-   return(<React.Fragment>
-             <button onClick={showAuction} >Add</button>
-       
-        {showhide && <form  >
-            <input type = "text" name ="titel" value={title} onChange={UpdateTitle}/>
-            <input type = "text" name ="beskrivning" value={description} onChange={UpdateDescription}/>
+     return(<React.Fragment>
+             <button onClick={showAuction} >Add Auction</button>
+      
+        {showhide && <form >
+           
+            
+            <input type = "text" name ="titel" value={title} onChange={UpdateTitle}/>        
+            <input type = "text" name ="beskrivning" value={description} onChange={UpdateDescription}/>                      
             <input type = "text" name ="StartDatum" value={startDate} onChange={UpdateStartdate}/>
             <input type = "text" name ="SlutDatum" value={endDate} onChange={UpdateEnddate}/>
             <input type = "text" name ="Utropspris" value={estimate} onChange={UpdateEstimate}/>
-        
             <button onClick ={addAuction}>  Submit</button>
             
         </form>}
-        </React.Fragment>
+        
+           </React.Fragment>
 
     )
 }
