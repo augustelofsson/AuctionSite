@@ -10,9 +10,21 @@ const BidList = ({ auktionID }) => {
   }, [auktionID]);
 
   return (
-    <div>
-      {console.log('bidlist: ' + bids.length)}
-    </div>
+    <div id='bid-list'>
+    {bids.length ? (
+      <>
+        {bids.map(bid => {
+          return (
+            <Bid key={bid.BudID} total={bid.Summa} bidder={bid.Budgivare} />
+          );
+        })} 
+        </>
+        ) : (
+          <>
+            <h4>Det finns inga bud för den här auktionen.</h4>
+          </>
+        )}
+      </div>
   );
 };
 

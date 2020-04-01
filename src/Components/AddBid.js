@@ -8,9 +8,9 @@ const [BidAmount, setBidAmount] = useState(0);
 const [Name, setName] = useState('');
 const [error, setError] = useState('');
 
-useEffect(() => {
-     GetBids(props.value.AuktionID)
 
+useEffect(() => {
+    GetBids(props.value)
 }, []);
 
 const setAmount = (e) => {
@@ -19,7 +19,7 @@ const setAmount = (e) => {
 const setUsername = (e) => {
     setName(e.target.value);
 }
-const checkBid = (e) => {
+const checkBid = e => {
     e.preventDefault();
     let highestbid = bids[bids.length - 1].Summa;
 
@@ -29,11 +29,11 @@ const checkBid = (e) => {
         const bidData = {
             BudID : 0,
             Summa : BidAmount,
-            AuktionID : props.value.AuktionID,
+            AuktionID : props.value,
             Budgivare : Name
         }
         AddBid(bidData);
-        GetBids(props.value.AuktionID);
+        GetBids(props.value);
         setError('');
     }
 }

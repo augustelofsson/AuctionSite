@@ -8,7 +8,7 @@ export const BidContext = createContext();
 export const BidContextProvider = (props) =>  {
     const [bids, setBids] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    
+
     const GetBids = async (id) => {
         await fetch(`${API_URL}bud/${GROUP_NUM}/${id}`)
         .then(res => {return res.json()})
@@ -23,7 +23,7 @@ export const BidContextProvider = (props) =>  {
     }
 
     const AddBid = async (bidData) => {
-        console.log(bidData)
+        
         await fetch(`${API_URL}bud/${GROUP_NUM}/${bidData.AuktionID}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
