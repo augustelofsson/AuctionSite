@@ -3,15 +3,14 @@ import {BidContext} from '../contexts/BidContext';
 
 const AddBid = (props) => {
 
-const {AddBid, GetHighestBid, GetBids, bids} = useContext(BidContext);
+const {AddBid, GetBids, bids} = useContext(BidContext);
 const [BidAmount, setBidAmount] = useState(0); 
 const [Name, setName] = useState('');
 const [error, setError] = useState('');
 
 useEffect(() => {
-     GetBids(props.AuktionID)
-    console.log(bids)
-    
+     GetBids(props.value.AuktionID)
+
 }, []);
 
 const setAmount = (e) => {
@@ -30,20 +29,24 @@ const checkBid = (e) => {
         const bidData = {
             BudID : 0,
             Summa : BidAmount,
-            AuktionID : props.AuktionID,
+            AuktionID : props.value.AuktionID,
             Budgivare : Name
         }
         AddBid(bidData);
-        GetBids(props.AuktionID);
+        GetBids(props.value.AuktionID);
         setError('');
     }
 }
     return ( <div>
-            <label>Namn:</label>
-            <input type="text" value={Name} onChange={setUsername}></input>
-            <input type="number" value={BidAmount} onChange={setAmount}></input>
+            <div>
+            <input type="text" value={Name} onChange={setUsername} placeholder='Namn...' />
+            </div>
+            <div>
+            <input type="number" value={BidAmount} onChange={setAmount} />
+            </div>
+            <div>
             <button onClick={checkBid}>Lägg bud</button>
-            <br></br>
+            </div>
             <span>{error}</span>
         </div> );
 }

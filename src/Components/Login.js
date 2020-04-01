@@ -10,7 +10,7 @@ const Login = () => {
         <div className='ml-auto'>
             {context.username === '' && (
                 <>
-                    <input type='text' placeholder='användare' onChange={(e) => setInputUsername(e.currentTarget.value)} />
+                    <input type='text' placeholder='Användare' onChange={(e) => setInputUsername(e.currentTarget.value)} />
                     <button onClick={() => context.handleLogin(inputUsername)}>logga in</button>
                 </>
             )}

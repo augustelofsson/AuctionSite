@@ -1,27 +1,24 @@
 import React,{createContext, useState, useEffect} from 'react'
 
-
-
 const API_URL = 'http://nackowskis.azurewebsites.net/api/';
 const GROUP_NUM = 2230;
 
 export const BidContext = createContext();
 
-
-
-
 export const BidContextProvider = (props) =>  {
-
     const [bids, setBids] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
     
     const GetBids = async (id) => {
         await fetch(`${API_URL}bud/${GROUP_NUM}/${id}`)
-        .then(res => res.json())
+        .then(res => {return res.json()})
         .then(data => {
+            console.log(data);
             setIsLoading(false);
             setBids(data);
+        })
+        .catch(err => {
+            console.log(err);
         });
     }
 
@@ -34,18 +31,21 @@ export const BidContextProvider = (props) =>  {
         })  
         GetBids(bidData.AuktionID);       
     }
-    
 
     const GetHighestBid = () => {
 
         const highestBid = bids[bids.length - 1]
         return highestBid.Summa;
     }
-   
+
+    useEffect(() => {
+        console.log('bidcontext:');
+    }, [bids])
     
-return <BidContext.Provider value={{bids, isLoading, GetBids, GetHighestBid, AddBid}}>
-            {props.children}
-        </BidContext.Provider>
+    return <BidContext.Provider value={{bids, isLoading, GetBids, GetHighestBid, AddBid}}>
+        {props.children}
+    </BidContext.Provider>
 
 }
+
 export default BidContextProvider;

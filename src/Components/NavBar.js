@@ -1,22 +1,26 @@
-import React, {useContext, useEffect, useState } from 'react';
-import { Navbar, Form, FormControl, Button } from 'react-bootstrap';
+import React, {useContext } from 'react';
+import { Navbar } from 'react-bootstrap';
 import Login from './Login';
 import AuctionForm  from '../Components/AuctionForm';
 import Search from '../Components/Search';
-
 import {AuctionContext} from '../contexts/auctionContext';
 
 const NavBar = () => {
+    const context = useContext(AuctionContext);
     
+    const handleReset = () => {
+        let doc = document.getElementById('searchInput');
+        doc.value = '';
+        context.handleReturnHome();
+    }
+
     return (
         <Navbar bg="light" variant="light">
-            
-            <Navbar.Brand href="#home">Grupp4's auktions sidas namn</Navbar.Brand>
-            <Search/>
-            <Login/>
-            <AuctionForm/>
-             </Navbar>
-             
+            <Navbar.Brand href='#' onClick={handleReset}>Nackowskis</Navbar.Brand>
+            <Search />
+            <AuctionForm />
+            <Login />
+        </Navbar>
     )
 }
 

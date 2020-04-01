@@ -10,7 +10,6 @@ const [description, setDescription] = useState('');
 const [startDate, setStarDate] = useState('');
 const [endDate, setEndDate] = useState('');
 const [estimate, setEstimate]= useState('');
-
 const [showhide, setShowHide] = useState(false);
 
 
@@ -44,7 +43,7 @@ const showAuction = e => {
     setShowHide(!showhide);
 }
      return(<React.Fragment>
-             <button onClick={showAuction} >Add Auction</button>
+             <button onClick={showAuction} >Lägg till auktion</button>
       
         {showhide && <form >
            
@@ -54,7 +53,7 @@ const showAuction = e => {
             <input type = "text" name ="StartDatum" value={startDate} onChange={UpdateStartdate}/>
             <input type = "text" name ="SlutDatum" value={endDate} onChange={UpdateEnddate}/>
             <input type = "text" name ="Utropspris" value={estimate} onChange={UpdateEstimate}/>
-            <button onClick ={addAuction}>  Submit</button>
+            <button onClick ={addAuction}>Submit</button>
             
         </form>}
         

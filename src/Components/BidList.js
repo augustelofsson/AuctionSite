@@ -3,17 +3,15 @@ import { BidContext } from '../contexts/BidContext';
 import Bid from './Bid';
 
 const BidList = ({ auktionID }) => {
-  const { GetBids, bids } = useContext(BidContext);
+  const {GetBids, bids} = useContext(BidContext);
 
   useEffect(() => {
-    GetBids(auktionID);
-  }, []);
+    
+  }, [auktionID]);
 
   return (
     <div>
-      {bids.map(bid => {
-        return <Bid key={bid.BudID} total={bid.Summa} bidder={bid.Budgivare} />;
-      })}
+      {console.log('bidlist: ' + bids.length)}
     </div>
   );
 };

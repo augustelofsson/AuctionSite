@@ -10,7 +10,7 @@ const AuctionDetailed = (props) => {
 
     
     useEffect(() => {
-        const auctionEndDate = Date.parse(props.SlutDatum)
+        const auctionEndDate = Date.parse(props.values.SlutDatum)
         if(date < auctionEndDate){
             setIsOpen(true)
         }else{
@@ -30,7 +30,7 @@ const AuctionDetailed = (props) => {
         <div>
             <p>Status: Öppen</p>
             <div>
-            <AddBid value={props.AuktionID}/>
+            <AddBid value={props.values.AuktionID}/>
             </div>
         </div> 
         :
@@ -39,7 +39,7 @@ const AuctionDetailed = (props) => {
         </div>
         }
         <div>
-            <BidList value={props.AuktionID}/>
+            <BidList auktionID={props.values.AuktionID}/>
         </div>
     </div> );
 }

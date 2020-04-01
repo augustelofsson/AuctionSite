@@ -3,15 +3,13 @@ import React, {createContext, useEffect, useState } from 'react';
 const API_URL = 'http://nackowskis.azurewebsites.net/api/';
 const GROUP_NUM = 2230;
 
-export const AuctionContext = React.createContext();
+export const AuctionContext = createContext();
 
 export const AuctionProvider = (props) => {
     const [auctions, setAuctions] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [search, setSearch]= useState('');
    
-   
-    const handleGetList = async () => {
+    const handleGetList = async (str = '') => {
         setIsLoading(true);
         await fetch(API_URL + 'auktion/' + GROUP_NUM, {
             method: 'GET'
@@ -21,28 +19,12 @@ export const AuctionProvider = (props) => {
         })
         .then(data => {
             setIsLoading(false);
-            setAuctions(data);
-            // if (search !== '') // filter if there is something
-            // {
-            //     const list = data.filter(auc =>
-            //         auc.Titel.toLowerCase().includes(search)
-            //     );
-            //     setAuctions(list);
-            // } else {
-            //     setAuctions(data);
-            // }
+            const list = data.filter(auc =>
+                auc.Titel.toLowerCase().includes(str)
+            );
+            setAuctions(list);
         })
     }
-    useEffect(() => {
-        if(search === ''){
-            handleGetList();
-        }else{
-            const list = auctions.filter(auc =>
-                auc.Titel.toLowerCase().includes(search)
-            );
-                setAuctions(list);
-        }
-    }, [search]) 
     
     const handleAdd = async (auction) => {
         auction.Gruppkod = GROUP_NUM;
@@ -74,32 +56,23 @@ export const AuctionProvider = (props) => {
         handleGetList();
     }
 
-   const handleSubmit = async (e) => {
-         e.preventDefault()
-          handleGetList()
-        setIsLoading(false)
-   }
-        const handleSearchChange = (e) => {
-            setSearch(e.target.value)
-            handleGetList();
-          }
-          const handleReturnHome = () => {
-            setSearch('');
-            handleGetList();
-            
-           }
+    const handleSearchChange = (e) => {
+        //setSearch(e.target.value)
+        handleGetList(e.target.value);
+    }
 
-         
-   
+    const handleReturnHome = () => {
+        //setSearch('');
+        handleGetList();
+    }
+
     useEffect(() => {
-         console.log(auctions);
          if (isLoading) {
             handleGetList();
          }
     }, [auctions])
-
    
-    return <AuctionContext.Provider value={{ auctions, isLoading, handleAdd,handleDelete, handleUpdate, handleSubmit, handleSearchChange, handleReturnHome}}>
+    return <AuctionContext.Provider value={{ auctions, isLoading, handleAdd, handleDelete, handleUpdate, handleSearchChange, handleReturnHome }}>
         {props.children}
         </AuctionContext.Provider>
 }
