@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AddBid from './AddBid';
 import BidList from './BidList';
+import DeleteAuction from './DeleteAuction';
 
 const AuctionDetailed = props => {
   const date = Date.now();
@@ -26,7 +27,11 @@ const AuctionDetailed = props => {
         <div>
           <p>Status: Öppen</p>
           <div>
-            <AddBid value={props.values.AuktionID} />
+            <DeleteAuction
+              AuktionID={props.values.AuktionID}
+              setModalOpen={props.setModalOpen}
+            />
+            <AddBid value={props.values} />
           </div>
         </div>
       ) : (
