@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import AddBid from './AddBid';
 import BidList from './BidList';
 import DeleteAuction from './DeleteAuction';
+import { LoginContext } from '../contexts/loginContext';
+import { BidContext } from '../contexts/BidContext';
 
 const AuctionDetailed = props => {
   const date = Date.now();
   const [isOpen, setIsOpen] = useState(true);
+  const { username } = useContext(LoginContext);
+  const { bids } = useContext(BidContext);
 
   useEffect(() => {
     const auctionEndDate = Date.parse(props.values.SlutDatum);
@@ -27,10 +31,10 @@ const AuctionDetailed = props => {
         <div>
           <p>Status: Öppen</p>
           <div>
-            <DeleteAuction
+            {username === props.SkapadAv && bids.length === 0 && (<DeleteAuction
               AuktionID={props.values.AuktionID}
-              setModalOpen={props.setModalOpen}
-            />
+              setModalOpen={props.setModalOpen} />)
+            }
             <AddBid value={props.values} />
           </div>
         </div>

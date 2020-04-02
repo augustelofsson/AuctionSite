@@ -3,10 +3,7 @@ import {
   Card,
   Modal,
   Button,
-  Container,
-  Row,
-  Col,
-  CardDeck
+  Container
 } from 'react-bootstrap';
 import { AuctionContext } from '../contexts/auctionContext';
 import AuctionDetailed from '../Components/AuctionDetailed';
@@ -45,7 +42,7 @@ const AuctionList = () => {
     >
       {items}
       <Modal show={modalOpen} onHide={() => setModalOpen(false)}>
-        <AuctionDetailed values={detailed} setModalOpen={setModalOpen} />
+        <AuctionDetailed values={detailed} setModalOpen={setModalOpen} SkapadAv={detailed.SkapadAv} />
         <Button variant='primary' onClick={() => setModalOpen(false)}>
           Stäng
         </Button>
