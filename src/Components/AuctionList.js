@@ -45,7 +45,7 @@ const AuctionList = () => {
     >
       {items}
       <Modal show={modalOpen} onHide={() => setModalOpen(false)}>
-        <AuctionDetailed values={detailed} />
+        <AuctionDetailed values={detailed} setModalOpen={setModalOpen} />
         <Button variant='primary' onClick={() => setModalOpen(false)}>
           Stäng
         </Button>

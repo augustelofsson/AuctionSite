@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuctionContext } from '../contexts/auctionContext';
 import { Modal } from 'react-bootstrap';
+import { LoginContext } from '../contexts/loginContext';
 
 const AuctionForm = () => {
   const { handleAdd } = useContext(AuctionContext);
+  const { username } = useContext(LoginContext);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [startDate, setStarDate] = useState('');
@@ -26,8 +28,10 @@ const AuctionForm = () => {
   const UpdateEstimate = e => {
     setEstimate(e.target.value);
   };
-  const addAuction = e => {
-    e.preventDefault();
+
+  const addAuction = () => {
+    if (username === '') {
+    }
 
     const obj = {
       AuktionID: 0,
@@ -36,53 +40,88 @@ const AuctionForm = () => {
       StartDatum: startDate,
       SlutDatum: endDate,
       Utropspris: estimate,
-      SkapadAv: 'Asma Rizwan'
+      SkapadAv: username
     };
     handleAdd(obj);
+    setModalOpen(false);
+  };
+
+  const ShowModal = () => {
+    setModalOpen(true);
   };
 
   return (
     <React.Fragment>
-      <button onClick={() => setModalOpen(true)}>Lägg till auktion</button>
-      <Modal Show={modalOpen} onHide={() => setModalOpen(false)}>
-        <div>
-          <label>Titel</label>
-          <input
-            type='text'
-            name='titel'
-            value={title}
-            onChange={UpdateTitle}
-          />
-          <label>Beskrivning</label>
-          <input
-            type='text'
-            name='beskrivning'
-            value={description}
-            onChange={UpdateDescription}
-          />
-          <label>Start datum</label>
-          <input
-            type='text'
-            name='StartDatum'
-            value={startDate}
-            onChange={UpdateStartdate}
-          />
-          <label>Slut datum</label>
-          <input
-            type='text'
-            name='SlutDatum'
-            value={endDate}
-            onChange={UpdateEnddate}
-          />
-          <label>Utropspris</label>
-          <input
-            type='text'
-            name='Utropspris'
-            value={estimate}
-            onChange={UpdateEstimate}
-          />
-          <button onClick={addAuction}>Submit</button>
-        </div>
+      <button onClick={ShowModal}>Lägg till auktion</button>
+      <Modal show={modalOpen} onHide={() => setModalOpen(false)}>
+        {username === '' ? (
+          <div>
+            <p>Du måste logga in för att lägga till en ny auktion</p>
+          </div>
+        ) : (
+          <>
+            <Modal.Header closeButton>
+              <Modal.Title>Lägg till en auktion</Modal.Title>
+            </Modal.Header>
+            <form>
+              <div>
+                <input
+                  type='text'
+                  name='titel'
+                  placeholder='Titel'
+                  value={title}
+                  onChange={UpdateTitle}
+                />
+              </div>
+              <div>
+                <input
+                  type='text'
+                  name='beskrivning'
+                  placeholder='Beskrivning'
+                  value={description}
+                  onChange={UpdateDescription}
+                />
+              </div>
+              <div>
+                <input
+                  type='text'
+                  name='StartDatum'
+                  value={startDate}
+                  placeholder='Startdatum'
+                  onChange={UpdateStartdate}
+                />
+              </div>
+              <div>
+                <input
+                  type='text'
+                  name='SlutDatum'
+                  value={endDate}
+                  placeholder='Slutdatum'
+                  onChange={UpdateEnddate}
+                />
+              </div>
+              <div>
+                <input
+                  type='text'
+                  name='Utropspris'
+                  value={estimate}
+                  placeholder='Utropspris'
+                  onChange={UpdateEstimate}
+                />
+              </div>
+              <Modal.Footer>
+                <button
+                  variant='primary'
+                  onClick={() => {
+                    addAuction();
+                  }}
+                >
+                  Lägg till
+                </button>
+              </Modal.Footer>
+            </form>
+          </>
+        )}
       </Modal>
     </React.Fragment>
   );

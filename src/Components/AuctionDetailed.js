@@ -27,7 +27,10 @@ const AuctionDetailed = props => {
         <div>
           <p>Status: Öppen</p>
           <div>
-            <DeleteAuction AuktionID={props.values.AuktionID} />
+            <DeleteAuction
+              AuktionID={props.values.AuktionID}
+              setModalOpen={props.setModalOpen}
+            />
             <AddBid value={props.values} />
           </div>
         </div>

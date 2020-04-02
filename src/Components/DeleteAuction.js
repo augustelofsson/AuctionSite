@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { AuctionContext } from '../contexts/auctionContext';
 
-const DeleteAuction = ({ AuktionID }) => {
-  const { handleDelete } = useContext(AuctionContext);
+const DeleteAuction = ({ AuktionID, setModalOpen }) => {
+  const { handleDelete, handleGetList } = useContext(AuctionContext);
 
   const handleDeleteAuktion = () => {
     handleDelete(AuktionID);
+    setModalOpen(false);
   };
 
   return (

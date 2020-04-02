@@ -10,20 +10,18 @@ export const BidContextProvider = props => {
   const [isLoading, setIsLoading] = useState(true);
 
   const GetBids = async id => {
-    if (id !== undefined) {
-      await fetch(`${API_URL}bud/${GROUP_NUM}/${id}`)
-        .then(res => {
-          return res.json();
-        })
-        .then(data => {
-          data.reverse();
-          setIsLoading(false);
-          setBids(data);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
+    await fetch(`${API_URL}bud/${GROUP_NUM}/${id}`)
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        data.reverse();
+        setIsLoading(false);
+        setBids(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   const AddBid = async bidData => {

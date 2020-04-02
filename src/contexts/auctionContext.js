@@ -38,12 +38,12 @@ export const AuctionProvider = props => {
   };
 
   const handleDelete = async id => {
-    console.log('handleDelete');
     setIsLoading(true);
     fetch(API_URL + 'auktion/' + GROUP_NUM + '?id=' + id, {
       method: 'DELETE'
+    }).then(res => {
+      handleGetList();
     });
-    await handleGetList();
   };
 
   const handleUpdate = async auction => {
