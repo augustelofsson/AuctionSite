@@ -19,7 +19,11 @@ const AddBid = props => {
   };
   const checkBid = e => {
     e.preventDefault();
-    let highestbid = bids[bids.length - 1].Summa;
+    let highestbid = 0;
+
+    if (bids.length >= 1) {
+      highestbid = bids[bids.length - 1].Summa;
+    }
 
     if (highestbid >= BidAmount) {
       setError('Budet är för lågt');
