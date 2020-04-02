@@ -2,25 +2,28 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuctionContext } from '../contexts/auctionContext';
 import { Modal } from 'react-bootstrap';
 import { LoginContext } from '../contexts/loginContext';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 const AuctionForm = () => {
   const { handleAdd } = useContext(AuctionContext);
   const { username } = useContext(LoginContext);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [startDate, setStarDate] = useState('');
+  const [startDate, setStarDate] = useState();
   const [endDate, setEndDate] = useState('');
   const [estimate, setEstimate] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
 
   const UpdateTitle = e => {
+      console.log(startDate)
     setTitle(e.target.value);
   };
   const UpdateDescription = e => {
     setDescription(e.target.value);
   };
-  const UpdateStartdate = e => {
-    setStarDate(e.target.value);
+  const UpdateStartdate = date => {
+    setStarDate(date);
   };
   const UpdateEnddate = e => {
     setEndDate(e.target.value);
@@ -63,7 +66,7 @@ const AuctionForm = () => {
             <Modal.Header closeButton>
               <Modal.Title>Lägg till en auktion</Modal.Title>
             </Modal.Header>
-            <form>
+            <form onSubmit={e => e.preventDefault()}>
               <div>
                 <input
                   type='text'
@@ -83,22 +86,30 @@ const AuctionForm = () => {
                 />
               </div>
               <div>
-                <input
-                  type='text'
-                  name='StartDatum'
-                  value={startDate}
-                  placeholder='Startdatum'
-                  onChange={UpdateStartdate}
-                />
+              <DatePicker placeholderText='Startdatum'
+                  selected={startDate}
+                  onChange={date => UpdateStartdate(date)}
+                  minDate={new Date()}
+                  isClearable
+                  showTimeSelect
+                  timeFormat='HH:mm'
+                  timeIntervals={15}
+                  timeCaption='Klockslag'
+                  dateFormat='yyyy-MM-dd HH:mm'>  
+              </DatePicker>
               </div>
               <div>
-                <input
-                  type='text'
-                  name='SlutDatum'
-                  value={endDate}
-                  placeholder='Slutdatum'
-                  onChange={UpdateEnddate}
-                />
+              <DatePicker placeholderText='Slutdatum'
+                  selected={endDate}
+                  onChange={date => setEndDate(date)}
+                  minDate={new Date()}
+                  isClearable
+                  showTimeSelect
+                  timeFormat='HH:mm'
+                  timeIntervals={15}
+                  timeCaption='Klockslag'
+                  dateFormat='yyyy-MM-dd HH:mm'>
+              </DatePicker>
               </div>
               <div>
                 <input
