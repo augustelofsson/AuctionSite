@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Card, Modal, Button } from 'react-bootstrap';
+import { Card, Modal, Button, Container, Row, Col, CardDeck } from 'react-bootstrap';
 import {AuctionContext} from '../contexts/auctionContext';
 import AuctionDetailed from '../Components/AuctionDetailed';
 
@@ -9,27 +9,28 @@ const AuctionList=()=>{
     
     const { auctions } = useContext(AuctionContext);
    
-    let list = auctions.map(product=>{
+    let items = auctions.map(product=>{
         return (
-            <li className='d-inline-flex' key={product.AuktionID}>
-                <Card onClick={() => {
+            <Col className="card text-center mt-5 col-sm-4 "  key={product.AuktionID}>
+            
+                <Card.Body style={{margin : '10%'}}  border="light" className="card-body text-dark" onClick={() => {
                     setDetailed(product);
                     setModalOpen(true);
                 }}>
                     <Card.Title>{product.Titel}</Card.Title>
-                    <Card.Body>{product.Beskrivning}</Card.Body>
-                </Card>
-            </li>
+                    <Card.Text className="card-text text-secondary">{product.Beskrivning}</Card.Text>
+                    <Card.Footer>Utropspris: {product.Utropspris}</Card.Footer>
+                </Card.Body>
+                
+            </Col>
         )
     });
     
     return(
-        <div className="container">
-            <div className='d-flex flex-row w-100'> 
-                <ul className='list-unstyled'>
-                    {list}
-                </ul>
-            </div>
+        <Container className="d-flex justify-content-center">
+            <Row  style={{padding : '5%'}}>     
+                {items}  
+            </Row>
             <Modal show={modalOpen} onHide={() => setModalOpen(false)}>
                 <AuctionDetailed 
                     values={detailed}/>
@@ -37,7 +38,7 @@ const AuctionList=()=>{
                     Save Changes
                 </Button>
             </Modal>
-        </div>
+        </Container>
     )
 }
 export default AuctionList;
