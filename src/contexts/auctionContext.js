@@ -14,14 +14,22 @@ export const AuctionProvider = props => {
     await fetch(API_URL + 'auktion/' + GROUP_NUM, {
       method: 'GET'
     })
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        setIsLoading(false);
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      setIsLoading(false);
+      if (str === '') {
+        var d = new Date();
+        const list = data.filter(
+          auc => auc.Titel.toLowerCase().includes(str) && new Date(auc.StartDatum) < d && new Date(auc.SlutDatum) >d 
+        );
+        setAuctions(list);
+      } else {
         const list = data.filter(auc => auc.Titel.toLowerCase().includes(str));
         setAuctions(list);
-      });
+      }
+    });
   };
 
   const handleAdd = async auction => {
@@ -51,8 +59,9 @@ export const AuctionProvider = props => {
     fetch(API_URL + 'auktion/' + GROUP_NUM + '/' + auction.id, {
       method: 'PUT',
       body: JSON.stringify(auction)
-    });
-    handleGetList();
+    }).then(() => {
+      handleGetList();
+    })
   };
 
   const handleSearchChange = e => {

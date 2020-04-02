@@ -39,7 +39,7 @@ export const BidContextProvider = props => {
   };
 
   useEffect(() => {
-    console.log('bidcontext:');
+    
   }, [bids]);
 
   return (

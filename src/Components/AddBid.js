@@ -35,7 +35,7 @@ const AddBid = props => {
         const bidData = {
           BudID: 0,
           Summa: BidAmount,
-          AuktionID: props.value,
+          AuktionID: props.value.AuktionID,
           Budgivare: auth.username
         };
         AddBid(bidData);
