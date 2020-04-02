@@ -2,46 +2,43 @@ import React, { useState, useEffect } from 'react';
 import AddBid from './AddBid';
 import BidList from './BidList';
 
+const AuctionDetailed = props => {
+  const date = Date.now();
+  const [isOpen, setIsOpen] = useState(true);
 
-const AuctionDetailed = (props) => {
+  useEffect(() => {
+    const auctionEndDate = Date.parse(props.values.SlutDatum);
+    if (date < auctionEndDate) {
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
+    }
+  }, []);
 
-    const date = Date.now();
-    const [isOpen, setIsOpen] = useState(true);
-
-    
-    useEffect(() => {
-        const auctionEndDate = Date.parse(props.values.SlutDatum)
-        if(date < auctionEndDate){
-            setIsOpen(true)
-        }else{
-            setIsOpen(false)
-        }
-    }, [])
-    
-    
-    
-    return ( <div>
-        <h3>{props.values.Titel}</h3>
-        <h4>{props.values.Beskrivning}</h4>
-        <p>Utropspris: {props.values.Utropspris}</p>
-        <p>StartDatum: {props.values.StartDatum}</p>
-        <p>SlutDatum: {props.values.SlutDatum}</p>
-        {isOpen ? 
+  return (
+    <div>
+      <h3>{props.values.Titel}</h3>
+      <p>{props.values.Beskrivning}</p>
+      <p>Utropspris: {props.values.Utropspris}</p>
+      <p>StartDatum: {props.values.StartDatum}</p>
+      <p>SlutDatum: {props.values.SlutDatum}</p>
+      {isOpen ? (
         <div>
-            <p>Status: Öppen</p>
-            <div>
-            <AddBid value={props.values.AuktionID}/>
-            </div>
-        </div> 
-        :
-        <div>
-            <p>Status: Avslutad</p>
+          <p>Status: Öppen</p>
+          <div>
+            <AddBid value={props.values.AuktionID} />
+          </div>
         </div>
-        }
+      ) : (
         <div>
-            <BidList auktionID={props.values.AuktionID}/>
+          <p>Status: Avslutad</p>
         </div>
-    </div> );
-}
- 
+      )}
+      <div>
+        <BidList auktionID={props.values.AuktionID} />
+      </div>
+    </div>
+  );
+};
+
 export default AuctionDetailed;
