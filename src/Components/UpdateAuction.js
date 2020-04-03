@@ -47,13 +47,15 @@ const UpdateAuction = ({ Auction }) => {
   }
 
   const handleUpdateAuction = () => {
+    
     let auction = Auction;
-    auction.Beskrivningning = description;
-    auction.SlutDatum = endDate;
+    auction.Beskrivning = description;
+    auction.SlutDatum = moment(endDate).format('YYYY-MM-DD HH:mm:ss');
     auction.Titel = title;
     auction.Utropspris = estimate;
     handleUpdate(auction);
     setModalOpen(false);
+    
   };
 
   return (
@@ -63,7 +65,7 @@ const UpdateAuction = ({ Auction }) => {
       <Modal.Header closeButton>
         <Modal.Title>Uppdatera auktion</Modal.Title>
       </Modal.Header>
-      <form>
+      <form onSubmit={(e) => e.preventDefault()}>
         <div>
           <input
             type='text'
