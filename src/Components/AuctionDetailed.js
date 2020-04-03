@@ -5,6 +5,7 @@ import DeleteAuction from './DeleteAuction';
 import { LoginContext } from '../contexts/loginContext';
 import { BidContext } from '../contexts/BidContext';
 import UpdateAuction from './UpdateAuction';
+import moment from 'moment';
 
 const AuctionDetailed = props => {
   const date = Date.now();
@@ -26,8 +27,8 @@ const AuctionDetailed = props => {
       <h3>{props.values.Titel}</h3>
       <p>{props.values.Beskrivning}</p>
       <p>Utropspris: {props.values.Utropspris}</p>
-      <p>StartDatum: {props.values.StartDatum}</p>
-      <p>SlutDatum: {props.values.SlutDatum}</p>
+      <p>StartDatum: {moment(props.values.StartDatum).format('YYYY-MM-DD HH:mm:ss').toString()}</p>
+      <p>SlutDatum: {moment(props.values.SlutDatum).format('YYYY-MM-DD HH:mm:ss').toString()}</p>
       <p>Skapad av: {props.values.SkapadAv}</p>
       {isOpen ? (
         <div>
