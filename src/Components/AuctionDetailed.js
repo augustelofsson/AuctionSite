@@ -4,6 +4,7 @@ import BidList from './BidList';
 import DeleteAuction from './DeleteAuction';
 import { LoginContext } from '../contexts/loginContext';
 import { BidContext } from '../contexts/BidContext';
+import UpdateAuction from './UpdateAuction';
 
 const AuctionDetailed = props => {
   const date = Date.now();
@@ -27,14 +28,23 @@ const AuctionDetailed = props => {
       <p>Utropspris: {props.values.Utropspris}</p>
       <p>StartDatum: {props.values.StartDatum}</p>
       <p>SlutDatum: {props.values.SlutDatum}</p>
+      <p>Skapad av: {props.values.SkapadAv}</p>
       {isOpen ? (
         <div>
           <p>Status: Öppen</p>
           <div>
-            {username === props.SkapadAv && bids.length === 0 && (<DeleteAuction
-              AuktionID={props.values.AuktionID}
-              setModalOpen={props.setModalOpen} />)
-            }
+            {username === props.SkapadAv && bids.length === 0 && (
+              <>
+                <DeleteAuction
+                  AuktionID={props.values.AuktionID}
+                  setModalOpen={props.setModalOpen} />
+
+                <UpdateAuction
+                  Auction={props.values}
+                  setModalOpen={props.setModalOpen} />
+              </>
+            )}
+             
             <AddBid value={props.values} />
           </div>
         </div>
