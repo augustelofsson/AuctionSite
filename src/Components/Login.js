@@ -6,6 +6,11 @@ const Login = () => {
 
     const context = useContext(LoginContext);
 
+    const logOut = () => {
+        setInputUsername('');
+        context.handleLogout();
+    }
+
     return (
         <div className='ml-auto'>
             {context.username === '' && (
@@ -18,7 +23,7 @@ const Login = () => {
             {context.username !== '' && (
                 <>
                     <span>{context.username}</span>
-                    <button onClick={() => context.handleLogout()}>logga ut</button>
+                    <button onClick={() => logOut()}>logga ut</button>
                 </>
             )}
         </div>

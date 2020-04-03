@@ -20,10 +20,10 @@ export const AuctionProvider = props => {
     })
     .then(data => {
       setIsLoading(false);
-      data.forEach(element => {
-        element.SlutDatum = moment.utc(element.SlutDatum).local().format('YYYY-MM-DD HH:mm:ss');
-        element.StartDatum = moment.utc(element.StartDatum).local().format('YYYY-MM-DD HH:mm:ss');
-      });
+       data.forEach(element => {
+        element.SlutDatum = moment.utc(element.SlutDatum, 'YYYY-MM-DD HH:mm:ss').local().toDate();
+        element.StartDatum = moment.utc(element.StartDatum, 'YYYY-MM-DD HH:mm:ss').local().toDate();
+       });
       if (str === '') {
         var d = new Date();
         const list = data.filter(auc => 
@@ -67,11 +67,17 @@ export const AuctionProvider = props => {
     auction.SlutDatum = moment.utc(auction.SlutDatum).toDate();
 
     setIsLoading(true);
-    fetch(API_URL + 'auktion/' + GROUP_NUM + '/' + auction.id, {
+    console.log(auction.AuktionID);
+    fetch(API_URL + 'auktion/' + GROUP_NUM + '/' + auction.AuktionID, {
       method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(auction)
     }).then(() => {
       handleGetList();
+    })
+    .catch(err => {
+      console.log('error');
+      console.log(err);
     })
   };
 

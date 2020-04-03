@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AuctionContext } from '../contexts/auctionContext';
 import { Modal } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
@@ -12,7 +12,7 @@ const UpdateAuction = ({ Auction }) => {
   const [endDate, setEndDate] = useState(new Date(Auction.SlutDatum));
   const [estimate, setEstimate] = useState(Auction.Utropspris);
   const [modalOpen, setModalOpen] = useState(false);
-  const [minTime, setMinTime] = useState(new Date());
+  const [minTime, setMinTime] = useState(new Date(moment().startOf('day').toDate()));
  
   const UpdateTitle = e => {
     setTitle(e.target.value);
@@ -33,13 +33,13 @@ const UpdateAuction = ({ Auction }) => {
   };
 
   const ShowModal = async () => {
-    let min = await calculateTime(new Date())
+    let min = await calculateTime(Auction.StartDatum);
     setMinTime(min);
     setModalOpen(true);
   }
 
   const calculateTime = async (date) => {
-    let isToday = moment(date).isSame(moment(), 'day');
+    let isToday = moment(date).isSame(moment(Auction.StartDatum), 'day');
     if (isToday) {
         return moment(Math['ceil']((+ moment()) / (+ moment.duration(15, 'minutes'))) * (+ moment.duration(15, 'minutes'))).toDate();
     }
@@ -48,13 +48,22 @@ const UpdateAuction = ({ Auction }) => {
 
   const handleUpdateAuction = () => {
     let auction = Auction;
-    auction.Beskrivningning = description;
+    auction.Beskrivning = description;
     auction.SlutDatum = endDate;
     auction.Titel = title;
     auction.Utropspris = estimate;
     handleUpdate(auction);
     setModalOpen(false);
   };
+
+  const test = async () => {
+    let min = await calculateTime(Auction.StartDatum);
+    setMinTime(min);
+  }
+
+  useEffect(() => {
+    test();
+  }, [])
 
   return (
     <>
@@ -63,7 +72,7 @@ const UpdateAuction = ({ Auction }) => {
       <Modal.Header closeButton>
         <Modal.Title>Uppdatera auktion</Modal.Title>
       </Modal.Header>
-      <form>
+      <form onSubmit={(e) => e.preventDefault()}>
         <div>
           <input
             type='text'
