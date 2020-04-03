@@ -11,7 +11,7 @@ const AuctionForm = () => {
   const { username } = useContext(LoginContext);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [endDate, setEndDate] = useState(new Date);
+  const [endDate, setEndDate] = useState(new Date());
   const [estimate, setEstimate] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
   const [minTime, setMinTime] = useState(new Date());
