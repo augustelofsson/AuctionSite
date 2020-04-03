@@ -33,7 +33,7 @@ const UpdateAuction = ({ Auction }) => {
   };
 
   const ShowModal = async () => {
-    let min = await calculateTime(Auction.StartDatum);
+    let min = await calculateTime(Auction.SlutDatum);
     setMinTime(min);
     setModalOpen(true);
   }
@@ -56,14 +56,6 @@ const UpdateAuction = ({ Auction }) => {
     setModalOpen(false);
   };
 
-  const test = async () => {
-    let min = await calculateTime(Auction.StartDatum);
-    setMinTime(min);
-  }
-
-  useEffect(() => {
-    test();
-  }, [])
 
   return (
     <>
