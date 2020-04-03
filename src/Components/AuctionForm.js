@@ -14,7 +14,7 @@ const AuctionForm = () => {
   const [endDate, setEndDate] = useState(new Date);
   const [estimate, setEstimate] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
-  const [minTime, setMinTime] = useState(new Date);
+  const [minTime, setMinTime] = useState(new Date());
 
   const UpdateTitle = e => {
     setTitle(e.target.value);
@@ -25,7 +25,6 @@ const AuctionForm = () => {
   };
 
   const UpdateEnddate = async (date) => {
-    console.log(date);
     let min = await calculateTime(date)
     setMinTime(min);
     setEndDate(date);
@@ -79,7 +78,7 @@ const AuctionForm = () => {
             </Modal.Header>
             <form onSubmit={e => e.preventDefault()}>
               <div>
-                <label>Titel</label>
+                <label>Titel</label><br></br>
                 <input
                   type='text'
                   name='titel'
@@ -89,7 +88,7 @@ const AuctionForm = () => {
                 />
               </div>
               <div>
-              <label>Beskrivning</label>
+              <label>Beskrivning</label><br></br>
                 <input
                   type='text'
                   name='beskrivning'
@@ -99,7 +98,7 @@ const AuctionForm = () => {
                 />
               </div>
               <div>
-              <label>Slutdatum</label>
+              <label>Slutdatum</label><br></br>
               <DatePicker placeholderText='Slutdatum'
                   selected={endDate}
                   onChange={date => UpdateEnddate(date)}
@@ -115,7 +114,7 @@ const AuctionForm = () => {
               </DatePicker>
               </div>
               <div>
-              <label>Utropspris</label>
+              <label>Utropspris</label><br></br>
                 <input
                   type='text'
                   name='Utropspris'
