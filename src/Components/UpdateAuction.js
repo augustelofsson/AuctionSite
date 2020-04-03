@@ -50,7 +50,7 @@ const UpdateAuction = ({ Auction }) => {
     
     let auction = Auction;
     auction.Beskrivning = description;
-    auction.SlutDatum = moment(endDate).format('YYYY-MM-DD HH:mm:ss');
+    auction.SlutDatum = endDate.toUTCString();
     auction.Titel = title;
     auction.Utropspris = estimate;
     handleUpdate(auction);
