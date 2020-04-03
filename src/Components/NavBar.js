@@ -16,7 +16,7 @@ const NavBar = () => {
 
   return (
     <Navbar bg='light' variant='light'>
-      <Navbar.Brand href='' onClick={handleReset}>
+      <Navbar.Brand href='/' onClick={handleReset}>
         Stjärnleif's Auktioner
       </Navbar.Brand>
       <Search />
