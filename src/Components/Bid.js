@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Bid = ({ total, bidder, auctionOpen }) => {
+const Bid = ({ total, bidder, isOpen }) => {
   return (
     <div id='bid'>
-      {auctionOpen ? (
+      {isOpen ? (
         <div>
           <p>Summa: {total} kr</p>
           <p>Budgivare: {bidder}</p>

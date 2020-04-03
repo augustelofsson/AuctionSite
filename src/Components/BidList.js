@@ -12,7 +12,6 @@ const BidList = ({ auktionID, isOpen }) => {
 
       {bids.length ? (
         <>
-
           {
              isOpen ? (
               bids.map(bid => {
@@ -35,29 +34,5 @@ const BidList = ({ auktionID, isOpen }) => {
     </div>
   );
 };
-
-//   return (
-//     <div id='bid-list'>
-//       {bids.length ? (
-//         <>
-//           {bids.map(bid => {
-//             return (
-//               <Bid
-//                 key={bid.BudID}
-//                 total={bid.Summa}
-//                 bidder={bid.Budgivare}
-//                 auctionOpen={isOpen}
-//               />
-//             );
-//           })}
-//         </>
-//       ) : (
-//         <>
-//           <h4>Det finns inga bud för den här auktionen.</h4>
-//         </>
-//       )}
-//     </div>
-//   );
-// };
 
 export default BidList;
