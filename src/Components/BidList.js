@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { BidContext } from '../contexts/BidContext';
 import Bid from './Bid';
 
-const BidList = ({ auktionID }) => {
+const BidList = ({ auktionID, isOpen }) => {
   const { bids } = useContext(BidContext);
 
   useEffect(() => {}, [auktionID]);
@@ -13,7 +13,12 @@ const BidList = ({ auktionID }) => {
         <>
           {bids.map(bid => {
             return (
-              <Bid key={bid.BudID} total={bid.Summa} bidder={bid.Budgivare} />
+              <Bid
+                key={bid.BudID}
+                total={bid.Summa}
+                bidder={bid.Budgivare}
+                auctionOpen={isOpen}
+              />
             );
           })}
         </>
