@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
+import moment from 'moment';
 
 const API_URL = 'http://nackowskis.azurewebsites.net/api/';
 const GROUP_NUM = 2230;
@@ -19,10 +20,14 @@ export const AuctionProvider = props => {
     })
     .then(data => {
       setIsLoading(false);
+      data.forEach(element => {
+        element.SlutDatum = moment.utc(element.SlutDatum).local().format('YYYY-MM-DD HH:mm:ss');
+        element.StartDatum = moment.utc(element.StartDatum).local().format('YYYY-MM-DD HH:mm:ss');
+      });
       if (str === '') {
         var d = new Date();
-        const list = data.filter(
-          auc => auc.Titel.toLowerCase().includes(str) && new Date(auc.StartDatum) < d && new Date(auc.SlutDatum) >d 
+        const list = data.filter(auc => 
+          auc.Titel.toLowerCase().includes(str) && new Date(auc.StartDatum) < d && new Date(auc.SlutDatum) > d
         );
         setAuctions(list);
       } else {
@@ -35,6 +40,9 @@ export const AuctionProvider = props => {
   const handleAdd = async auction => {
     auction.Gruppkod = GROUP_NUM;
     setIsLoading(true);
+
+    auction.StartDatum = moment.utc(auction.StartDatum).toDate();
+    auction.SlutDatum = moment.utc(auction.SlutDatum).toDate();
 
     await fetch(API_URL + 'auktion/' + GROUP_NUM, {
       method: 'POST',
@@ -54,7 +62,10 @@ export const AuctionProvider = props => {
     });
   };
 
-  const handleUpdate = async auction => {
+  const handleUpdate = async (auction) => {
+    auction.StartDatum = moment.utc(auction.StartDatum).toDate();
+    auction.SlutDatum = moment.utc(auction.SlutDatum).toDate();
+
     setIsLoading(true);
     fetch(API_URL + 'auktion/' + GROUP_NUM + '/' + auction.id, {
       method: 'PUT',
