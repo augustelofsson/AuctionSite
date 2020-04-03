@@ -37,14 +37,16 @@ const AuctionDetailed = props => {
               <>
                 <DeleteAuction
                   AuktionID={props.values.AuktionID}
-                  setModalOpen={props.setModalOpen} />
+                  setModalOpen={props.setModalOpen}
+                />
 
                 <UpdateAuction
                   Auction={props.values}
-                  setModalOpen={props.setModalOpen} />
+                  setModalOpen={props.setModalOpen}
+                />
               </>
             )}
-             
+
             <AddBid value={props.values} />
           </div>
         </div>
@@ -54,7 +56,7 @@ const AuctionDetailed = props => {
         </div>
       )}
       <div>
-        <BidList auktionID={props.values.AuktionID} />
+        <BidList auktionID={props.values.AuktionID} isOpen={isOpen} />
       </div>
     </div>
   );

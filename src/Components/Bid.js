@@ -1,23 +1,21 @@
 import React from 'react';
 
-const Bid = ({total, bidder, isOpen }) => {
+const Bid = ({ total, bidder, auctionOpen }) => {
   return (
     <div id='bid'>
-      {
-      isOpen ? (
+      {auctionOpen ? (
         <div>
-      <p>Summa: {total} kr</p>
-      <p>Budgivare: {bidder}</p>
-      </div>
-      ):(
-        <div>
-        <p>HögstaBud: {total} kr</p>
-        <p>Budgivare: {bidder}</p>
+          <p>Summa: {total} kr</p>
+          <p>Budgivare: {bidder}</p>
         </div>
-     )}
+      ) : (
+        <div>
+          <p>HögstaBud: {total} kr</p>
+          <p>Budgivare: {bidder}</p>
+        </div>
+      )}
     </div>
- 
   );
-}
+};
 
 export default Bid;
