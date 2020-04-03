@@ -26,13 +26,44 @@ export const AuctionProvider = props => {
        });
       if (str === '') {
         var d = new Date();
-        const list = data.filter(auc => 
+        let list = data.filter(auc => 
           auc.Titel.toLowerCase().includes(str) && new Date(auc.StartDatum) < d && new Date(auc.SlutDatum) > d
         );
+        list = list.sort(function(a, b) {
+          a = new Date(a.SlutDatum);
+          b = new Date(b.SlutDatum);
+          return b > a ? -1 : a < b ? 1 : 0;
+        });
         setAuctions(list);
       } else {
         const list = data.filter(auc => auc.Titel.toLowerCase().includes(str));
-        setAuctions(list);
+        let now = new Date();
+
+        let closed = [];
+        let open = [];
+        list.sort(a => {
+          if (a.SlutDatum > now) {
+            open.push(a);
+          } else {
+            closed.push(a);
+          }
+          return;
+        });
+
+        open = open.sort(function(a, b) {
+          a = new Date(a.SlutDatum);
+          b = new Date(b.SlutDatum);
+          return b > a ? -1 : a < b ? 1 : 0;
+        });
+
+        closed = closed.sort(function(a, b) {
+          a = new Date(a.SlutDatum);
+          b = new Date(b.SlutDatum);
+          return a > b ? -1 : a < b ? 1 : 0;
+        });
+
+        let sorted = [ ...open, ...closed ];
+        setAuctions(sorted);
       }
     });
   };

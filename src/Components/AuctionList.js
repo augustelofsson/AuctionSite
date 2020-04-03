@@ -14,7 +14,7 @@ const AuctionList = () => {
 
   const { auctions } = useContext(AuctionContext);
 
-  let items = auctions.map(product => { 
+  let items = auctions.map((product) => { 
     return (
       <Card className='card text-center mt-3 mr-1' key={product.AuktionID}>
         <Card.Body
