@@ -4,43 +4,43 @@ import { Modal } from 'react-bootstrap';
 import { LoginContext } from '../contexts/loginContext';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
 
 const AuctionForm = () => {
   const { handleAdd } = useContext(AuctionContext);
   const { username } = useContext(LoginContext);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [startDate, setStarDate] = useState();
-  const [endDate, setEndDate] = useState('');
+  const [endDate, setEndDate] = useState(new Date);
   const [estimate, setEstimate] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
+  const [minTime, setMinTime] = useState(new Date);
 
   const UpdateTitle = e => {
-      console.log(startDate)
     setTitle(e.target.value);
   };
+
   const UpdateDescription = e => {
     setDescription(e.target.value);
   };
-  const UpdateStartdate = date => {
-    setStarDate(date);
+
+  const UpdateEnddate = async (date) => {
+    console.log(date);
+    let min = await calculateTime(date)
+    setMinTime(min);
+    setEndDate(date);
   };
-  const UpdateEnddate = e => {
-    setEndDate(e.target.value);
-  };
+
   const UpdateEstimate = e => {
     setEstimate(e.target.value);
   };
 
   const addAuction = () => {
-    if (username === '') {
-    }
-
     const obj = {
       AuktionID: 0,
       Titel: title,
       Beskrivning: description,
-      StartDatum: startDate,
+      StartDatum: new Date(),
       SlutDatum: endDate,
       Utropspris: estimate,
       SkapadAv: username
@@ -49,9 +49,20 @@ const AuctionForm = () => {
     setModalOpen(false);
   };
 
-  const ShowModal = () => {
+  const ShowModal = async () => {
+    let min = await calculateTime(new Date());
+    setEndDate(min);
+
     setModalOpen(true);
   };
+
+  const calculateTime = async (date) => {
+    let isToday = moment(date).isSame(moment(), 'day');
+    if (isToday) {
+        return moment(Math['ceil']((+ moment()) / (+ moment.duration(15, 'minutes'))) * (+ moment.duration(15, 'minutes'))).toDate();
+    }
+    return moment().startOf('day').toDate();
+  }
 
   return (
     <React.Fragment>
@@ -68,6 +79,7 @@ const AuctionForm = () => {
             </Modal.Header>
             <form onSubmit={e => e.preventDefault()}>
               <div>
+                <label>Titel</label>
                 <input
                   type='text'
                   name='titel'
@@ -77,6 +89,7 @@ const AuctionForm = () => {
                 />
               </div>
               <div>
+              <label>Beskrivning</label>
                 <input
                   type='text'
                   name='beskrivning'
@@ -86,23 +99,13 @@ const AuctionForm = () => {
                 />
               </div>
               <div>
-              <DatePicker placeholderText='Startdatum'
-                  selected={startDate}
-                  onChange={date => UpdateStartdate(date)}
-                  minDate={new Date()}
-                  isClearable
-                  showTimeSelect
-                  timeFormat='HH:mm'
-                  timeIntervals={15}
-                  timeCaption='Klockslag'
-                  dateFormat='yyyy-MM-dd HH:mm'>  
-              </DatePicker>
-              </div>
-              <div>
+              <label>Slutdatum</label>
               <DatePicker placeholderText='Slutdatum'
                   selected={endDate}
-                  onChange={date => setEndDate(date)}
+                  onChange={date => UpdateEnddate(date)}
                   minDate={new Date()}
+                  minTime={minTime}
+                  maxTime={moment().endOf('day').toDate()} // set to 23:59 pm today
                   isClearable
                   showTimeSelect
                   timeFormat='HH:mm'
@@ -112,6 +115,7 @@ const AuctionForm = () => {
               </DatePicker>
               </div>
               <div>
+              <label>Utropspris</label>
                 <input
                   type='text'
                   name='Utropspris'
