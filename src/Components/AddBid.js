@@ -11,7 +11,7 @@ const AddBid = props => {
 
   useEffect(() => {
     GetBids(props.value.AuktionID);
-  }, []);
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const setAmount = e => {
     setBidAmount(e.target.value);

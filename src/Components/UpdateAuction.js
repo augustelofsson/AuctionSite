@@ -12,7 +12,7 @@ const UpdateAuction = ({ Auction }) => {
   const [endDate, setEndDate] = useState(new Date(Auction.SlutDatum));
   const [estimate, setEstimate] = useState(Auction.Utropspris);
   const [modalOpen, setModalOpen] = useState(false);
-  const [minTime, setMinTime] = useState(new Date);
+  const [minTime, setMinTime] = useState(new Date());
  
   const UpdateTitle = e => {
     setTitle(e.target.value);
@@ -33,7 +33,7 @@ const UpdateAuction = ({ Auction }) => {
   };
 
   const ShowModal = async () => {
-    let min = await calculateTime(new Date)
+    let min = await calculateTime(new Date())
     setMinTime(min);
     setModalOpen(true);
   }

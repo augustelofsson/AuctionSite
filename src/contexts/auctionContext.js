@@ -89,7 +89,7 @@ export const AuctionProvider = props => {
     if (isLoading) {
       handleGetList();
     }
-  }, [auctions]);
+  }, [auctions]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <AuctionContext.Provider
