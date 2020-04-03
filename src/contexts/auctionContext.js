@@ -63,15 +63,21 @@ export const AuctionProvider = props => {
   };
 
   const handleUpdate = async (auction) => {
-    auction.StartDatum = moment.utc(auction.StartDatum).toDate();
-    auction.SlutDatum = moment.utc(auction.SlutDatum).toDate();
+    // auction.StartDatum = moment.utc(auction.StartDatum).toDate();
+    // auction.SlutDatum = moment.utc(auction.SlutDatum).toDate();
 
     setIsLoading(true);
-    fetch(API_URL + 'auktion/' + GROUP_NUM + '/' + auction.id, {
+    console.log(auction.AuktionID);
+    fetch(API_URL + 'auktion/' + GROUP_NUM + '/' + auction.AuktionID, {
       method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(auction)
     }).then(() => {
       handleGetList();
+    })
+    .catch(err => {
+      console.log('error');
+      console.log(err);
     })
   };
 
