@@ -15,15 +15,15 @@ const Login = () => {
         <div className='ml-auto'>
             {context.username === '' && (
                 <>
-                    <input type='text' placeholder='Användare' onChange={(e) => setInputUsername(e.currentTarget.value)} />
-                    <button onClick={() => context.handleLogin(inputUsername)}>logga in</button>
+                    <input id="loginInput" type='text' placeholder='Användare' onChange={(e) => setInputUsername(e.currentTarget.value)} />
+                    <button id="btnlogin" onClick={() => context.handleLogin(inputUsername)}>logga in</button>
                 </>
             )}
 
             {context.username !== '' && (
                 <>
-                    <span>{context.username}</span>
-                    <button onClick={() => logOut()}>logga ut</button>
+                    <span id="user">{context.username}</span>
+                    <button id="btnlogin" onClick={() => logOut()}>logga ut</button>
                 </>
             )}
         </div>

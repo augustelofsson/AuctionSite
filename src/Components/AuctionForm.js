@@ -65,21 +65,21 @@ const AuctionForm = () => {
 
   return (
     <React.Fragment>
-      <button onClick={ShowModal}>Lägg till auktion</button>
-      <Modal show={modalOpen} onHide={() => setModalOpen(false)}>
+      <button id="add" onClick={ShowModal}>Lägg till auktion</button>
+      <Modal id="formModal" show={modalOpen} onHide={() => setModalOpen(false)}>
         {username === '' ? (
           <div>
-            <p>Du måste logga in för att lägga till en ny auktion</p>
+            <p id="alert">Du måste logga in för att lägga till en ny auktion</p>
           </div>
         ) : (
           <>
-            <Modal.Header closeButton>
+            <Modal.Header id="header" closeButton>
               <Modal.Title>Lägg till en auktion</Modal.Title>
             </Modal.Header>
             <form onSubmit={e => e.preventDefault()}>
               <div>
                 <label>Titel</label><br></br>
-                <input
+                <input  
                   type='text'
                   name='titel'
                   placeholder='Titel'
@@ -88,7 +88,7 @@ const AuctionForm = () => {
                 />
               </div>
               <div>
-              <label>Beskrivning</label><br></br>
+              <label >Beskrivning</label><br></br>
                 <input
                   type='text'
                   name='beskrivning'
@@ -123,8 +123,8 @@ const AuctionForm = () => {
                   onChange={UpdateEstimate}
                 />
               </div>
-              <Modal.Footer>
-                <button
+              <Modal.Footer id="foo" >
+                <button id="button"
                   variant='primary'
                   onClick={() => {
                     addAuction();

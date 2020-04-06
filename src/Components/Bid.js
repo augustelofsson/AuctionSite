@@ -2,16 +2,16 @@ import React from 'react';
 
 const Bid = ({ total, bidder, isOpen }) => {
   return (
-    <div id='bid'>
+    <div >
       {isOpen ? (
         <div>
-          <p>Summa: {total} kr</p>
-          <p>Budgivare: {bidder}</p>
+          <p id="par">Summa: {total} kr</p>
+          <p id="par">Budgivare: {bidder}</p>
         </div>
       ) : (
         <div>
-          <p>HögstaBud: {total} kr</p>
-          <p>Budgivare: {bidder}</p>
+          <p id="par">HögstaBud: {total} kr</p>
+          <p id="par">Budgivare: {bidder}</p>
         </div>
       )}
     </div>

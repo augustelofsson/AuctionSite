@@ -11,7 +11,7 @@ const DeleteAuction = ({ AuktionID, setModalOpen }) => {
 
   return (
     <div>
-      <button className='btn-danger' onClick={handleDeleteAuktion}>
+      <button id="del" className='btn-danger' onClick={handleDeleteAuktion}>
         Ta bort auktion
       </button>
     </div>

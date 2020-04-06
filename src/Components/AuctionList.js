@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import {
+  Col,
   Card,
   Modal,
   Button,
@@ -14,8 +15,9 @@ const AuctionList = () => {
 
   const { auctions } = useContext(AuctionContext);
 
-  let items = auctions.map((product) => { 
+  let items = auctions.map((product) =>{ 
     return (
+      <Col className="col-3" key={product.AuktionID}>
       <Card className='card text-center mt-3 mr-1' key={product.AuktionID}>
         <Card.Body
           border='light'
@@ -29,21 +31,23 @@ const AuctionList = () => {
           <Card.Text className='card-text text-secondary'>
             {product.Beskrivning}
           </Card.Text>
-          <Card.Footer>Utropspris: {product.Utropspris}</Card.Footer>
+          <Card.Footer classname="text-center" id="ft">Utropspris: {product.Utropspris}</Card.Footer>
         </Card.Body>
       </Card>
+      </Col>
     );
   });
 
   return (
     <Container
       fluid
-      className='d-flex flex-row flex-wrap justify-content-center m-1'
+      className='d-flex flex-row flex-wrap justify-content-center'
+      style={{width : '80%'}}
     >
       {items}
       <Modal show={modalOpen} onHide={() => setModalOpen(false)}>
         <AuctionDetailed values={detailed} setModalOpen={setModalOpen} SkapadAv={detailed.SkapadAv} />
-        <Button variant='primary' onClick={() => setModalOpen(false)}>
+        <Button  id= "close" variant='primary' onClick={() => setModalOpen(false)}>
           Stäng
         </Button>
       </Modal>

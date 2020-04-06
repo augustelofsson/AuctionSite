@@ -48,10 +48,10 @@ const AddBid = props => {
   return (
     <div id='add-bid'>
       <div>
-        <input type='number' defaultValue={BidAmount} onChange={setAmount} />
+        <input id="add-input" type='number' defaultValue={BidAmount} onChange={setAmount} />
       </div>
       <div>
-        <button onClick={checkBid}>Lägg bud</button>
+        <button id="add-btn" onClick={checkBid}>Lägg bud</button>
       </div>
       <span>{error}</span>
     </div>

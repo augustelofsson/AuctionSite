@@ -59,13 +59,14 @@ const UpdateAuction = ({ Auction }) => {
 
   return (
     <>
-    <button onClick={ShowModal}>Updatera action</button>
-    <Modal show={modalOpen} onHide={() => setModalOpen(false)}>
-      <Modal.Header closeButton>
+    <button id="update" onClick={ShowModal}>Updatera auktion</button>
+    <Modal id="formModal" show={modalOpen} onHide={() => setModalOpen(false)}>
+      <Modal.Header  id="header" closeButton>
         <Modal.Title>Uppdatera auktion</Modal.Title>
       </Modal.Header>
       <form onSubmit={(e) => e.preventDefault()}>
         <div>
+        <label>Titel</label><br></br>
           <input
             type='text'
             name='titel'
@@ -74,7 +75,8 @@ const UpdateAuction = ({ Auction }) => {
             onChange={UpdateTitle}
           />
         </div>
-        <div>
+        <div>      
+        <label >Beskrivning</label><br></br>
           <input
             type='text'
             name='beskrivning'
@@ -84,6 +86,7 @@ const UpdateAuction = ({ Auction }) => {
           />
         </div>
         <div>
+        <label>Slutdatum</label><br></br>
             <DatePicker 
                 placeholderText='Slutdatum'
                 selected={endDate}
@@ -100,6 +103,7 @@ const UpdateAuction = ({ Auction }) => {
             </DatePicker>
         </div>
         <div>
+        <label>Utropspris</label><br></br>
           <input
             type='text'
             name='Utropspris'
@@ -109,7 +113,7 @@ const UpdateAuction = ({ Auction }) => {
           />
         </div>
         <Modal.Footer>
-          <button
+          <button id="button"
             variant='primary'
             onClick={() => {
               handleUpdateAuction();

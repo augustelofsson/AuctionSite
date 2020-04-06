@@ -23,20 +23,20 @@ const AuctionDetailed = props => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div>
-      <h3>{props.values.Titel}</h3>
-      <p>{props.values.Beskrivning}</p>
-      <p>Utropspris: {props.values.Utropspris}</p>
-      <p>StartDatum: {moment(props.values.StartDatum).format('YYYY-MM-DD HH:mm:ss').toString()}</p>
-      <p>SlutDatum: {moment(props.values.SlutDatum).format('YYYY-MM-DD HH:mm:ss').toString()}</p>
-      <p>Skapad av: {props.values.SkapadAv}</p>
+    <div id="detail">
+      <h3 id="heading">{props.values.Titel}</h3>
+      <p id="par">{props.values.Beskrivning}</p>
+      <p id="par">Utropspris: {props.values.Utropspris}</p>
+      <p id="par">StartDatum: {moment(props.values.StartDatum).format('YYYY-MM-DD HH:mm:ss').toString()}</p>
+      <p id="par">SlutDatum: {moment(props.values.SlutDatum).format('YYYY-MM-DD HH:mm:ss').toString()}</p>
+      <p id="par">Skapad av: {props.values.SkapadAv}</p>
       {isOpen ? (
         <div>
-          <p>Status: Öppen</p>
-          <div>
+          <p id="par">Status: Öppen</p>
+          <div >
             {username === props.SkapadAv && bids.length === 0 && (
               <>
-                <DeleteAuction
+                <DeleteAuction 
                   AuktionID={props.values.AuktionID}
                   setModalOpen={props.setModalOpen}
                 />
@@ -53,7 +53,7 @@ const AuctionDetailed = props => {
         </div>
       ) : (
         <div>
-          <p>Status: Avslutad</p>
+          <p  id="par">Status: Avslutad</p>
         </div>
       )}
       <div>
