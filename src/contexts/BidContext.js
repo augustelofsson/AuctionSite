@@ -33,9 +33,23 @@ export const BidContextProvider = props => {
     GetBids(bidData.AuktionID);
   };
 
-  const GetHighestBid = () => {
-    const highestBid = bids[bids.length - 1];
-    return highestBid.Summa;
+  const GetHighestBid = async (id) => {
+    let highestBid;
+    await fetch(`${API_URL}bud/${GROUP_NUM}/${id}`)
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        
+        const _bids = data;
+        if(_bids.length === 0){
+          highestBid = 0;
+        }else{
+          _bids.reverse()
+          highestBid = _bids[0].Summa;
+        }
+    })
+    return highestBid;
   };
 
   useEffect(() => {

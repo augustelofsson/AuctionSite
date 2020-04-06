@@ -8,14 +8,26 @@ import {
 } from 'react-bootstrap';
 import { AuctionContext } from '../contexts/auctionContext';
 import AuctionDetailed from '../Components/AuctionDetailed';
+import $ from 'jquery';
+import moment from 'moment';
 
 const AuctionList = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [detailed, setDetailed] = useState({});
 
   const { auctions } = useContext(AuctionContext);
+  $(document).ready(function(){
 
-  let items = auctions.map((product) =>{ 
+    $(".card").hover(
+      function(){
+        $(this).addClass('shadow-lg').css('cursor', 'pointer');
+      }, function(){
+        $(this).removeClass('shadow-lg');
+      }
+    )
+  });
+
+  let items = auctions.map((product) =>{
     return (
       <Col className="col-3" key={product.AuktionID}>
       <Card className='card text-center mt-3 mr-1' key={product.AuktionID}>
@@ -27,11 +39,13 @@ const AuctionList = () => {
             setModalOpen(true);
           }}
         >
-          <Card.Title>{product.Titel}</Card.Title>
+          <Card.Title className="card-Title">{product.Titel}</Card.Title>
+          <Card.Text>{product.Beskrivning.length > 40 ? (product.Beskrivning.substring(0, 40) + '...') : product.Beskrivning}</Card.Text>
           <Card.Text className='card-text text-secondary'>
-            {product.Beskrivning}
+            <span>SlutDatum: </span>
+            {moment(product.SlutDatum).format('YYYY-MM-DD HH:mm:ss').toString()}
           </Card.Text>
-          <Card.Footer classname="text-center" id="ft">Utropspris: {product.Utropspris}</Card.Footer>
+          <Card.Footer className="text-center" id="ft">Utropspris: {product.Utropspris}</Card.Footer>
         </Card.Body>
       </Card>
       </Col>

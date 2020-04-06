@@ -25,7 +25,9 @@ const AuctionDetailed = props => {
   return (
     <div id="detail">
       <h3 id="heading">{props.values.Titel}</h3>
-      <p id="par">{props.values.Beskrivning}</p>
+      <div id='par-wrapper'>
+      <p id="par1">{props.values.Beskrivning}</p>
+      </div>
       <p id="par">Utropspris: {props.values.Utropspris}</p>
       <p id="par">StartDatum: {moment(props.values.StartDatum).format('YYYY-MM-DD HH:mm:ss').toString()}</p>
       <p id="par">SlutDatum: {moment(props.values.SlutDatum).format('YYYY-MM-DD HH:mm:ss').toString()}</p>

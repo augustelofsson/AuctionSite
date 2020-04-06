@@ -1,10 +1,12 @@
 import React from 'react';
-import './App.css';
+import './Styles/App.css';
 import LoginContextProvider from '../contexts/loginContext';
 import AuctionContextProvider from '../contexts/auctionContext';
 import AuctionList from '../Components/AuctionList';
 import BidContextProvider from '../contexts/BidContext';
 import NavBar from '../Components/NavBar';
+import Footer from '../Components/Footer';
+
 
 const App = () => {
   return (
@@ -12,7 +14,8 @@ const App = () => {
       <AuctionContextProvider>
         <BidContextProvider>
             <NavBar />
-            <AuctionList/>            
+            <AuctionList/>
+            <Footer/>            
         </BidContextProvider>
       </AuctionContextProvider>
      </LoginContextProvider>
