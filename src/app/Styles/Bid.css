@@ -1,0 +1,18 @@
+.bid-error {
+    font-size: 22px;
+    color: red;
+}
+
+.empty-bid-list {
+    font-size: 20px;
+    text-align: center;
+}
+
+#add-bid {
+    margin-left: 20px;
+}
+
+#add-bid-input {
+    border: 1px solid rgb(184, 184, 184);
+    padding: 0.5rem;
+}

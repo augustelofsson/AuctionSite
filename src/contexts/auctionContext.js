@@ -24,10 +24,11 @@ export const AuctionProvider = props => {
         element.SlutDatum = moment.utc(element.SlutDatum, 'YYYY-MM-DD HH:mm:ss').local().toDate();
         element.StartDatum = moment.utc(element.StartDatum, 'YYYY-MM-DD HH:mm:ss').local().toDate();
        });
+      
       if (str === '') {
         var d = new Date();
         let list = data.filter(auc => 
-          auc.Titel.toLowerCase().includes(str) && new Date(auc.StartDatum) < d && new Date(auc.SlutDatum) > d
+          auc.Titel.toLowerCase().includes(str.toLowerCase()) && new Date(auc.StartDatum) < d && new Date(auc.SlutDatum) > d
         );
         list = list.sort(function(a, b) {
           a = new Date(a.SlutDatum);
@@ -36,12 +37,12 @@ export const AuctionProvider = props => {
         });
         setAuctions(list);
       } else {
-        const list = data.filter(auc => auc.Titel.toLowerCase().includes(str));
+        const list = data.filter(auc => auc.Titel.toLowerCase().includes(str.toLowerCase()));
         let now = new Date();
 
         let closed = [];
         let open = [];
-        list.sort(a => {
+        list.forEach(a => {
           if (a.SlutDatum > now) {
             open.push(a);
           } else {

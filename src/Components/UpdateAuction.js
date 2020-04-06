@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuctionContext } from '../contexts/auctionContext';
 import { Modal } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
@@ -52,14 +52,17 @@ const UpdateAuction = ({ Auction }) => {
     auction.SlutDatum = endDate;
     auction.Titel = title;
     auction.Utropspris = estimate;
-    handleUpdate(auction);
-    setModalOpen(false);
+
+    if (title !== '' && description !== '' && estimate !== '') {
+      handleUpdate(auction);
+      setModalOpen(false);
+    }
   };
 
 
   return (
     <>
-    <button id="update" onClick={ShowModal}>Updatera auktion</button>
+    <button id="update" onClick={ShowModal}>Uppdatera</button>
     <Modal id="formModal" show={modalOpen} onHide={() => setModalOpen(false)}>
       <Modal.Header  id="header" closeButton>
         <Modal.Title>Uppdatera auktion</Modal.Title>
@@ -68,6 +71,7 @@ const UpdateAuction = ({ Auction }) => {
         <div>
         <label>Titel</label><br></br>
           <input
+            required
             type='text'
             name='titel'
             placeholder='Titel'
@@ -78,11 +82,12 @@ const UpdateAuction = ({ Auction }) => {
         <div>      
         <label >Beskrivning</label><br></br>
           <input
-            type='text'
-            name='beskrivning'
-            placeholder='Beskrivning'
-            value={description}
-            onChange={UpdateDescription}
+          required
+          type='text'
+          name='beskrivning'
+          placeholder='Beskrivning'
+          value={description}
+          onChange={UpdateDescription}
           />
         </div>
         <div>
@@ -105,6 +110,7 @@ const UpdateAuction = ({ Auction }) => {
         <div>
         <label>Utropspris</label><br></br>
           <input
+            required
             type='text'
             name='Utropspris'
             value={estimate}

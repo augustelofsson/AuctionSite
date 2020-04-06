@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { BidContext } from '../contexts/BidContext';
 import Bid from './Bid';
+import '../app/Styles/Bid.css';
 
 const BidList = ({ auktionID, isOpen }) => {
   const { bids } = useContext(BidContext);
@@ -28,7 +29,7 @@ const BidList = ({ auktionID, isOpen }) => {
         </>
       ) : (
         <>
-          <h4>Det finns inga bud för den här auktionen.</h4>
+          <h4 className='empty-bid-list'>Det finns inga bud för den här auktionen.</h4>
         </>
       )}
     </div>

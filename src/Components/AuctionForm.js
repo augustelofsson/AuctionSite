@@ -44,8 +44,15 @@ const AuctionForm = () => {
       Utropspris: estimate,
       SkapadAv: username
     };
-    handleAdd(obj);
-    setModalOpen(false);
+
+    if (title !== '' && description !== '' && estimate !== '') {
+      handleAdd(obj);
+      setModalOpen(false);
+      setTitle('');
+      setDescription('');
+      setEstimate('');
+    }
+
   };
 
   const ShowModal = async () => {
@@ -68,7 +75,7 @@ const AuctionForm = () => {
       <button id="add" onClick={ShowModal}>Lägg till auktion</button>
       <Modal id="formModal" show={modalOpen} onHide={() => setModalOpen(false)}>
         {username === '' ? (
-          <div>
+          <div className='alert-wrapper'>
             <p id="alert">Du måste logga in för att lägga till en ny auktion</p>
           </div>
         ) : (
@@ -76,10 +83,11 @@ const AuctionForm = () => {
             <Modal.Header id="header" closeButton>
               <Modal.Title>Lägg till en auktion</Modal.Title>
             </Modal.Header>
-            <form onSubmit={e => e.preventDefault()}>
+            <form onSubmit={e => e.preventDefault()} id='auction-form'>
               <div>
                 <label>Titel</label><br></br>
                 <input  
+                  required
                   type='text'
                   name='titel'
                   placeholder='Titel'
@@ -89,7 +97,10 @@ const AuctionForm = () => {
               </div>
               <div>
               <label >Beskrivning</label><br></br>
-                <input
+                <textarea
+                  required
+                  rows="4"
+                  cols="35"
                   type='text'
                   name='beskrivning'
                   placeholder='Beskrivning'
@@ -116,6 +127,7 @@ const AuctionForm = () => {
               <div>
               <label>Utropspris</label><br></br>
                 <input
+                  required
                   type='text'
                   name='Utropspris'
                   value={estimate}
@@ -123,7 +135,7 @@ const AuctionForm = () => {
                   onChange={UpdateEstimate}
                 />
               </div>
-              <Modal.Footer id="foo" >
+              <Modal.Footer id="foo">
                 <button id="button"
                   variant='primary'
                   onClick={() => {

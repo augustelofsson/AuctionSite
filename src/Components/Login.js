@@ -16,7 +16,7 @@ const Login = () => {
             {context.username === '' && (
                 <>
                     <input id="loginInput" type='text' placeholder='Användare' onChange={(e) => setInputUsername(e.currentTarget.value)} />
-                    <button id="btnlogin" onClick={() => context.handleLogin(inputUsername)}>logga in</button>
+                    <button id="btnlogin" onClick={() => context.handleLogin(inputUsername)}>Logga in</button>
                 </>
             )}
 
